@@ -51,18 +51,20 @@ app.get("/nuevo",function(req,res){
 	res.render("nuevo.ejs",{});
 });
 
-app.post("/guardar", upload.any(),function(req,res){
+app.post("/guardar", upload.single('libro[imagen]'),function(req,res,next){
 	var titu = req.body.libro.titulo;
 	var resu = req.body.libro.resumen;
 	var img = filename;
 	var fec = req.body.libro.fecha;
-	con.query("insert into personaje (titulo,resumen,imagen,fecha) value (\""+titu+"\",\""+res+"\",\""+img+"\",\""+fec+"\")",function(error,result){
+
+	con.query("insert into libro (titulo,resumen,imagen,fecha) value (\""+titu+"\",\""+res+"\",\""+img+"\",\""+fec+"\")",function(error,result){
+	console.log(error);
 	});
 	res.redirect("/");
 });
 
 app.get("/editar/:libroid",function(req,res){
-	con.query("select * from libros where libro_id="+req.params.libroid,function(error,result){
+	con.query("select * from libro where libro_id="+req.params.libroid,function(error,result){
 		res.render("editar.ejs",{libro:result[0]});
 	});
 });
@@ -73,7 +75,7 @@ app.post("/actualizar",function(req,res){
 	var resu = req.body.libro.resumen;
 	var img = req.body.libro.imagen;
 	var fec = req.body.libro.fecha;
-	con.query(" update libros set titulo=\""+titu+"\",resumen=\""+resu+"\",imagen=\""+img+"\",fecha=\""+fec+"\" where libro_id="+id,function(error,result){
+	con.query(" update libro set titulo=\""+titu+"\",resumen=\""+resu+"\",imagen=\""+img+"\",fecha=\""+fec+"\" where libro_id="+id,function(error,result){
 	});
 	res.redirect('/');
 	
@@ -81,7 +83,7 @@ app.post("/actualizar",function(req,res){
 });
 
 app.get("/eliminar/:libroid",function(req,res){
-	con.query("delete from libros where libro_id="+req.params.libroid,function(error,result){
+	con.query("delete from libro where libro_id="+req.params.libroid,function(error,result){
 	});
 	fs.unlink(__dirname+"/public/images"+filename, function(err) {
 	if (err) {
