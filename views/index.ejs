@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Libreria CRUD</title>
+</head>
+<body>
+	<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Libros</h2>
+			<a href="/nuevo" class="btn btn-default">Nuevo</a>
+			<br><br>
+			<% if(lista.length>0){%>
+			<table class="table table-bordered" border="1">
+			<thead>
+				<th>Titulo</th>
+				<th>Resumen</th>
+				<th>Imagen</th>
+				<th>Fecha</th>
+			</thead>
+			  <% for(var i=0; i<lista.length; i++) {%>
+				<tr class="quote">
+				  <td><%= lista[i].titulo %></td>
+				  <td><%= lista[i].resumen %></td>
+				  <td><img class="card-img-top img-responsive" src="<%= lista[i].imagen %>"></td>
+				  <td><%= lista[i].fecha %></td>
+				  <td>
+					<a href="/editar/<%= lista[i].libro_id %>" class="btn btn-warning">Editar</a>
+					<a href="/eliminar/<%= lista[i].libro_id %>" onclick="return confirm('¿Estas seguro de eliminar esta noticia?');" class="btn btn-danger">Eliminar</a>
+					
+				  </td>
+				</tr>
+			  <% } %>
+			</table>
+			<%} else {%>
+			<p class="alert alert-warning">No hay contactos</p>
+			<% } %>
+		</div>
+	</div>
+</div>
+</body>
+</html>

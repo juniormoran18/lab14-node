@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Nuevo Libro</title>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2 align="center">Nuevo Libro</h2>
+
+			<ol class="breadcrumb" style="margin-top:40px;">
+				<li><a href="/" style="text-decoration: none;color: black;"><i class="fa fa-home"></i> Inicio /</a></li>
+			</ol>
+			<br>
+			<form method="post" action="/guardar" enctype="multipart/form-data">
+			  <div class="form-group">
+					<label for="titulo">Titulo</label>
+					<input type="text" name="libro[titulo]" class="form-control" id="titulo" placeholder="Titulo" required>
+			  </div>
+
+			  <div class="form-group">
+					<label for="resumen">Resumen</label>
+					<input type="text" name="libro[resumen]" class="form-control" id="resumen" placeholder="Resumen" required>
+				</div>
+				
+				<div class="form-group">
+					<label for="imagen">Imagen</label>
+					<input type="file" name="libro[imagen]" class="form-control" id="imagen" required>
+			  </div>
+
+			  <div class="form-group">
+					<label for="fecha">Fecha</label>
+					<input type="date" name="libro[fecha]" class="form-control" id="fecha" required>
+			  </div>
+
+				<div class="form-group" align="center">
+					<button type="submit" class="btn btn-primary">Guardar</button>
+					<a href="/" class="btn btn-danger">Cancelar</a>
+				</div>
+				
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>
